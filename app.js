@@ -1,12 +1,16 @@
 // to run -> "node app"
 
-global.setTimeout(() => {
-    console.log("Timeout with global");
-}, 3000);
+// import single item
+// const users = require("./users");
 
-setTimeout(() => {
-    console.log("Timeout without global");
-}, 3000);
+// console.log(users);
 
-console.log(__dirname);
-console.log(__filename);
+// import multiple things
+// const multiple = require("./users");
+// console.log(multiple.numbers);
+
+
+// import multiple things using destructing
+const { numbers, string } = require("./users");
+console.log(numbers);
+console.log(string);
