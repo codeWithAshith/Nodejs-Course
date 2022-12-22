@@ -1,9 +1,12 @@
 // to run -> "node app"
 
-console.log("Hello World");
+global.setTimeout(() => {
+    console.log("Timeout with global");
+}, 3000);
 
-const message = (name) => {
-  console.log(`${name} is good`);
-};
+setTimeout(() => {
+    console.log("Timeout without global");
+}, 3000);
 
-message("Code with Ashith");
+console.log(__dirname);
+console.log(__filename);
