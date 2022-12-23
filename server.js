@@ -4,6 +4,10 @@ const fs = require("fs");
 const port = 3000;
 const hostName = "localhost";
 
+// run "npm init" or "npm init --y" to intialize npm package manager and install local dependencies
+// npm i moment
+
+
 const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "text/html");
   let route = "";
