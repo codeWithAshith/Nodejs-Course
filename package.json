@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/codeWithAshith/Nodejs-Course/issues"
   },
-  "homepage": "https://github.com/codeWithAshith/Nodejs-Course#readme"
+  "homepage": "https://github.com/codeWithAshith/Nodejs-Course#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
