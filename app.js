@@ -27,14 +27,14 @@ app.get("/", (req, res) => {
       price: 10,
     },
   ];
-  res.render("index", { items });
+  res.render("pages/index", { items });
 });
 
 app.get("/add-item", (req, res) => {
-  res.render("add-item");
+  res.render("pages/add-item");
 });
 
 // always add to the last page
 app.use((req, res) => {
-  res.render("404");
+  res.render("pages/404");
 });
