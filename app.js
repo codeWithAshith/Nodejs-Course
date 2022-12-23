@@ -2,10 +2,7 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
-// create database in mongoda atlas
-// mongoose is a orm
-// install mongoose
-// npm install mongoose --save
+const Item = require("./models/items");
 
 const mongodb =
   "mongodb+srv://root:root@cluster0.bypwb3z.mongodb.net/?retryWrites=true&w=majority";
@@ -14,39 +11,41 @@ mongoose.set("strictQuery", false);
 mongoose
   .connect(mongodb, () => {
     console.log("Connected to MongoDB");
+    app.listen(3000);
   })
   .catch((err) => console.log(err.reason));
 
 app.set("view engine", "ejs");
-app.listen(3000);
 
 app.get("/", (req, res) => {
-  const items = [
-    {
-      name: "Mobile Phone",
-      price: 1000,
-    },
-    {
-      name: "Tablet",
-      price: 900,
-    },
-    {
-      name: "Laptop",
-      price: 10000,
-    },
-    {
-      name: "Pen",
-      price: 10,
-    },
-  ];
-  res.render("pages/index", { items });
+  Item.find()
+    .then((result) => {
+      res.render("pages/index", { items: result });
+    })
+    .catch((err) => console.log(err));
 });
 
 app.get("/add-item", (req, res) => {
   res.render("pages/add-item");
 });
 
-// always add to the last page
+app.post("/items", (req, res) => {
+  // To insert test item into the db
+  //   const item = new Item({
+  //     name: "Test Item",
+  //     price: 300,
+  //   });
+
+  const item = Item(req.body);
+  item
+    .save()
+    .then(() => {
+      res.redirect("/");
+    })
+    .catch((err) => console.log(err));
+});
+
+// always add to the last line
 app.use((req, res) => {
   res.render("pages/404");
 });
