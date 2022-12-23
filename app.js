@@ -10,8 +10,8 @@ app.get("/", (req, res) => {
   res.sendFile("./views/index.html", { root: __dirname });
 });
 
-app.get("/contact", (req, res) => {
-  res.sendFile("./views/contact.html", { root: __dirname });
+app.get("/add-item", (req, res) => {
+  res.sendFile("./views/add-item.html", { root: __dirname });
 });
 
 // always add to the last page
