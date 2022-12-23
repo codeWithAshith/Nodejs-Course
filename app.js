@@ -1,9 +1,21 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 
-// install express js
-// npm i express
-// npm i ejs
+// create database in mongoda atlas
+// mongoose is a orm
+// install mongoose
+// npm install mongoose --save
+
+const mongodb =
+  "mongodb+srv://root:root@cluster0.bypwb3z.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.set("strictQuery", false);
+mongoose
+  .connect(mongodb, () => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => console.log(err.reason));
 
 app.set("view engine", "ejs");
 app.listen(3000);
