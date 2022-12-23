@@ -6,7 +6,19 @@ const hostName = "localhost";
 
 const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "text/html");
-  fs.readFile("./index.html", (error, data) => {
+  let route = "";
+  switch (req.url) {
+    case "/":
+      route = "index.html";
+      break;
+    case "/contact":
+      route = "contact.html";
+      break;
+    default:
+      route = "404.html";
+      break;
+  }
+  fs.readFile(route, (error, data) => {
     if (error) console.log(error);
     else {
       res.write(data);
