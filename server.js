@@ -8,10 +8,19 @@ const hostName = "localhost";
 // npm install -g nodemon
 
 const server = http.createServer((req, res) => {
-  console.log(req);
-  // Try localhost:3000 and also localhost:3000/contact
-  console.log(`Request url -> ${req.url}`);
-  console.log(`Request method -> ${req.method}`);
+  // To send plain text as response
+  // Go to http://localhost:3000/ to see the response
+
+  //   res.setHeader("Content-Type", "text/plain");
+  //   res.write("Welcome to Code with Ashith");
+  //   res.end();
+
+  // To send plain html as response
+  // Go to http://localhost:3000/ to see the response
+  res.setHeader("Content-Type", "text/html");
+  res.write("<h1>Welcome to Code with Ashith</h1>");
+  res.write("<p>This is a Nodejs Application</p>");
+  res.end();
 });
 
 // Enter localhost:3000 to see the log -> A request is made
