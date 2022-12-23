@@ -7,9 +7,14 @@ const app = express();
 app.listen(3000);
 
 app.get("/", (req, res) => {
-  res.send("<p>Home Page</p>");
+  res.sendFile("./views/index.html", { root: __dirname });
 });
 
 app.get("/contact", (req, res) => {
-  res.send("<p>Contact Page</p>");
+  res.sendFile("./views/contact.html", { root: __dirname });
+});
+
+// always add to the last page
+app.use((req, res) => {
+  res.sendFile("./views/404.html", { root: __dirname });
 });
