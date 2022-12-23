@@ -3,18 +3,20 @@ const app = express();
 
 // install express js
 // npm i express
+// npm i ejs
 
+app.set("view engine", "ejs");
 app.listen(3000);
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/index.html", { root: __dirname });
+  res.render("index");
 });
 
 app.get("/add-item", (req, res) => {
-  res.sendFile("./views/add-item.html", { root: __dirname });
+  res.render("add-item");
 });
 
 // always add to the last page
 app.use((req, res) => {
-  res.sendFile("./views/404.html", { root: __dirname });
+  res.render("404");
 });
