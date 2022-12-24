@@ -29,6 +29,16 @@ app.get("/add-item", (req, res) => {
   res.render("pages/add-item");
 });
 
+app.get("/item/:id", (req, res) => {
+  const id = req.params.id;
+  Item.findById(id)
+    .then((result) => {
+      console.log(result);
+      res.render("pages/item-detail", { item: result });
+    })
+    .catch((err) => console.log(err));
+});
+
 app.post("/items", (req, res) => {
   // To insert test item into the db
   //   const item = new Item({

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../partials/head') %>
+  <body>
+    <%- include('../partials/nav') %>
+    <div class="container">
+      <h3>Item Detail</h3>
+      <div>
+        <h5>Item name : <%= item.name%></h5>
+        <h5>Item price : <%= item.price%></h5>
+      </div>
+      <a href="#" class="delete btn">Delete</a>
+    </div>
+  </body>
+</html>
