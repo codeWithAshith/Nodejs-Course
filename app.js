@@ -7,6 +7,7 @@ const Item = require("./models/items");
 const mongodb =
   "mongodb+srv://root:root@cluster0.bypwb3z.mongodb.net/?retryWrites=true&w=majority";
 
+app.use(express.urlencoded({ extended: true }));
 mongoose.set("strictQuery", false);
 mongoose
   .connect(mongodb, () => {
@@ -39,13 +40,7 @@ app.get("/item/:id", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.post("/items", (req, res) => {
-  // To insert test item into the db
-  //   const item = new Item({
-  //     name: "Test Item",
-  //     price: 300,
-  //   });
-
+app.post("/item", (req, res) => {
   const item = Item(req.body);
   item
     .save()
@@ -53,6 +48,11 @@ app.post("/items", (req, res) => {
       res.redirect("/");
     })
     .catch((err) => console.log(err));
+});
+
+app.delete("/item/:id", (req, res) => {
+  const id = req.params.id;
+  Item.findByIdAndDelete(id).then((result) => {});
 });
 
 // always add to the last line
