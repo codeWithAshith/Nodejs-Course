@@ -50,6 +50,15 @@ app.post("/item", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.put("/item/:id", (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  console.log(req.body);
+  Item.findByIdAndUpdate(id, req.body).then((result) => {
+    res.json({ msg: "Updated Successfully" });
+  });
+});
+
 app.delete("/item/:id", (req, res) => {
   const id = req.params.id;
   Item.findByIdAndDelete(id).then((result) => {

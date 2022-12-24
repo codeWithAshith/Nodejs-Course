@@ -3,7 +3,7 @@
   <%- include('../partials/head') %>
   <body>
     <%- include('../partials/nav') %>
-    <div class="container">
+    <div id="itemContainer" class="container">
       <h3>Shopping List</h3>
       <ul class="collection with-header">
         <% if (items.length > 0) { %> <%items.forEach(item => {%>
@@ -13,7 +13,12 @@
               <%= item.name %> <%= item.price %>
             </a>
             <a href="#!" class="secondary-content">
-              <i class="material-icons">edit</i>
+              <i
+                class="material-icons modal-trigger"
+                href="#edit-item"
+                data-id="<%= item._id %>"
+                >edit</i
+              >
               <i class="material-icons">delete</i>
             </a>
           </div>
@@ -23,5 +28,63 @@
         <%}%>
       </ul>
     </div>
+    <!-- Modal Structure -->
+    <div id="edit-item" class="modal">
+      <div class="modal-content">
+        <h4>Edit Form</h4>
+        <form action="" id="editForm">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">shopping_cart</i>
+            <input id="item_name" type="text" class="validate" name="name" />
+            <label for="item_name">Item Name</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">request_quote</i>
+            <input id="price" type="tel" class="validate" name="price" />
+            <label for="price">Price</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a
+          href="#!"
+          id="editBtn"
+          class="modal-close waves-effect waves-green btn-flat"
+          >Update</a
+        >
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      let updateId;
+      document.addEventListener("DOMContentLoaded", function () {
+        var elems = document.querySelectorAll(".modal");
+        var instances = M.Modal.init(elems);
+      });
+      document.addEventListener("DOMContentLoaded", function (event) {
+        M.updateTextFields();
+      });
+      editBtn.onclick = async (e) => {
+        e.preventDefault();
+        let data = new FormData(editForm);
+        let response = await fetch(`/item/${updateId}`, {
+          method: "PUT",
+          body: new URLSearchParams(data),
+          headers: new Headers({
+            "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+          }),
+        });
+        let result = await response.json();
+        editForm.reset();
+        window.location.reload();
+        console.log(result.msg);
+      };
+      itemContainer.onclick = function (e) {
+        // console.log('e.target.textContent', e.target.textContent)
+        if (e.target.textContent === "edit") {
+          updateId = e.target.getAttribute("data-id");
+        }
+      };
+    </script>
   </body>
 </html>
