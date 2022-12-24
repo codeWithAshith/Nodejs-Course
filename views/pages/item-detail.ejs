@@ -9,7 +9,23 @@
         <h5>Item name : <%= item.name%></h5>
         <h5>Item price : <%= item.price%></h5>
       </div>
-      <a href="#" class="delete btn">Delete</a>
+      <a id="deleteBtn" data-id="<%= item._id%>" href="#" class="delete btn"
+        >Delete</a
+      >
     </div>
   </body>
+  <script>
+    deleteBtn.onclick = (event) => {
+      event.preventDefault();
+      const id = deleteBtn.dataset.id;
+      const endpoint = `/item/${id}`;
+      fetch(endpoint, { method: "DELETE" })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          window.location.href = data.redirect;
+        })
+        .catch((error) => console.log(error));
+    };
+  </script>
 </html>

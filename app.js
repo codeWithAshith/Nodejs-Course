@@ -52,7 +52,9 @@ app.post("/item", (req, res) => {
 
 app.delete("/item/:id", (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndDelete(id).then((result) => {});
+  Item.findByIdAndDelete(id).then((result) => {
+    res.json({ redirect: "/" });
+  });
 });
 
 // always add to the last line
