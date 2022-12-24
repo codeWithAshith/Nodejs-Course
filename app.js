@@ -52,8 +52,6 @@ app.post("/item", (req, res) => {
 
 app.put("/item/:id", (req, res) => {
   const id = req.params.id;
-  console.log(id);
-  console.log(req.body);
   Item.findByIdAndUpdate(id, req.body).then((result) => {
     res.json({ msg: "Updated Successfully" });
   });
